@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("pedido")
+@RequestMapping("pedidos")
 public class PedidoEndpoint {
 	
 	@Autowired
