@@ -16,12 +16,12 @@ import java.util.List;
 @RestController
 @RequestMapping("pedidos")
 public class PedidoEndpoint {
-	
+
 	@Autowired
 	DataUtil dataUtil;
-	
+
 	@RequestMapping(method = RequestMethod.GET, path = "/todositens")
-	public List<Item> todosItens(){
+	public List<Item> todosItens() {
 		System.out.println(dataUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
 		return asList(new Item("Pastel de frango"), new Item("5"));
 	}
