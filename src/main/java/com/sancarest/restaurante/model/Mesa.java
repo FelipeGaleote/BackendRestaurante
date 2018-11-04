@@ -12,10 +12,17 @@ public class Mesa implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String status;
-
+	
+	public Mesa(){
+		
+	}
+	
+	public Mesa(String status){
+		this.status = status;
+	}
 	public int getId() {
 		return id;
 	}
