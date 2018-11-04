@@ -13,12 +13,15 @@ public class Produto implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private long id;
 	private String nome;
 	private String descricao;
 	private double valor;
 	private String tipo;
 	private String urlFoto;
+	
+	public Produto() {
+	}
 
 	public Produto(int id, String nome, String descricao, double valor, String tipo, String urlFoto) {
 		super();
@@ -46,11 +49,11 @@ public class Produto implements Serializable{
 		this.urlFoto = urlFoto;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
