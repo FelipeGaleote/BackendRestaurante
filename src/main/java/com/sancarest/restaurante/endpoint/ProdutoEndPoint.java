@@ -33,27 +33,27 @@ public class ProdutoEndPoint {
 
 	@GetMapping("pizzas")
 	public List<Produto> informarPizzas() {
-		return asList(new Produto(1, "Big King", "Lanche", 12.99, "lanches", "https://picsum.photos/200/300/?random"));
+		return produtoRepository.findByTipo("pizzas");
 	}
 
 	@GetMapping("saladas")
 	public List<Produto> informarSaladas() {
-		return asList(new Produto(1, "Big King", "Lanche", 12.99, "lanches", "https://picsum.photos/200/300/?random"));
+		return produtoRepository.findByTipo("saladas");
 	}
 
 	@GetMapping("petiscos")
 	public List<Produto> informarPetiscos() {
-		return asList(new Produto(1, "Big King", "Lanche", 12.99, "lanches", "https://picsum.photos/200/300/?random"));
+		return produtoRepository.findByTipo("petiscos");
 	}
 
 	@GetMapping("sobremesas")
 	public List<Produto> informarSobremesas() {
-		return asList(new Produto(1, "Big King", "Lanche", 12.99, "lanches", "https://picsum.photos/200/300/?random"));
+		return produtoRepository.findByTipo("sobremesas");
 	}
 
 	@GetMapping("bebidas")
 	public List<Produto> informarBebidas() {
-		return asList(new Produto(1, "Big King", "Lanche", 12.99, "lanches", "https://picsum.photos/200/300/?random"));
+		return produtoRepository.findByTipo("bebidas");
 	}
 
 }
