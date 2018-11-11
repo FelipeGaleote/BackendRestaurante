@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sancarest.restaurante.model.Mesa;
 import com.sancarest.restaurante.repository.MesaRepository;
+import com.sancarest.restaurante.responses.BaseResponse;
+import com.sancarest.restaurante.responses.CreatedResponse;
+import com.sancarest.restaurante.responses.FailedResponse;
+import com.sancarest.restaurante.responses.RetrievedTablesResponse;
+import com.sancarest.restaurante.responses.UpdatedResponse;
 
 @RestController
 @RequestMapping("/mesa")
@@ -21,18 +26,36 @@ public class MesaEndpoint {
 	MesaRepository repository;
 	
 	@PostMapping
-	public void adicionarMesa() {
-		repository.save(new Mesa("Dísponivel"));
+	public BaseResponse adicionarMesa() {
+		try {
+			Mesa mesa = repository.save(new Mesa("Dísponivel"));
+			return new CreatedResponse("Mesa cadastrada com sucesso",mesa.getId());
+		} catch (Exception e) {
+			return new FailedResponse("Falha ao cadastrar mesa");
+		}
+		
 	}
 	
 	@GetMapping
-	public List<Mesa> informarMesas(){
-		return repository.findAllByOrderByIdAsc();
+	public BaseResponse informarMesas(){
+		try {
+			List<Mesa> tables = repository.findAll();
+			return new RetrievedTablesResponse("Mesas recuperadas com sucesso", tables);
+		} catch (Exception e) {
+			return new FailedResponse("Falha ao recuperar mesas");
+		}
+		
 	}
 	
 	@PutMapping
-	public void atualizarMesa(@RequestBody Mesa mesa) {
-		repository.save(mesa);
+	public BaseResponse atualizarMesa(@RequestBody Mesa mesa) {
+		try {
+			Mesa mesaAtualizada = repository.save(mesa);
+			return new UpdatedResponse("Mesa atualizada com sucesso", mesaAtualizada.getId());
+		} catch (Exception e) {
+			return new FailedResponse("Falha ao atualizar mesa");
+		}
+		
 	}
 	
 	

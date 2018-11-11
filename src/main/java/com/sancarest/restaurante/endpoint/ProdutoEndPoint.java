@@ -31,7 +31,7 @@ public class ProdutoEndPoint {
 	public BaseResponse cadastrarProduto(@RequestBody Produto produto) {
 		try {
 			Produto produtoSalvo = produtoRepository.save(produto);
-			return new CreatedResponse(produtoSalvo.getId(), "Produto cadastrado com sucesso");
+			return new CreatedResponse("Produto cadastrado com sucesso", produtoSalvo.getId());
 		} catch (Exception e) {
 			return new FailedResponse("Falha ao cadastrar o produto");
 		}
@@ -70,10 +70,10 @@ public class ProdutoEndPoint {
 	@GetMapping("petiscos")
 	public BaseResponse informarPetiscos() {
 		try {
-			List<Produto> retrievedProducts = produtoRepository.findByTipo("lanches");
+			List<Produto> retrievedProducts = produtoRepository.findByTipo("petiscos");
 			return new RetrievedProductsResponse("Produtos recuperados com sucesso",retrievedProducts);
 		} catch(Exception e) {
-			return new FailedResponse("Falha ao recuperar lanches");
+			return new FailedResponse("Falha ao recuperar petiscos");
 		}
 	}
 

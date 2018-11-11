@@ -2,12 +2,12 @@ package com.sancarest.restaurante.responses;
 
 import org.springframework.http.HttpStatus;
 
-public class CreatedResponse extends BaseResponse {
+public class UpdatedResponse extends BaseResponse{
 	
 	private long id;
-
-	public CreatedResponse(String statusMessage, long id) {
-		super(HttpStatus.CREATED.value(), statusMessage);
+	
+	public UpdatedResponse(String statusMessage, long id) {
+		super(HttpStatus.OK.value(), statusMessage);
 		this.id = id;
 	}
 
@@ -18,4 +18,5 @@ public class CreatedResponse extends BaseResponse {
 	public void setId(long id) {
 		this.id = id;
 	}
+
 }
