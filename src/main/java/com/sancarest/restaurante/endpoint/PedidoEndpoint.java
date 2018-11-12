@@ -47,7 +47,7 @@ public class PedidoEndpoint {
 	public BaseResponse criarPedido(@RequestBody Pedido pedido) {
 		Usuario autorDoPedido = userRepository.getOne(pedido.getIdUsuario());
 		if(autorDoPedido != null && repository.findByIdUsuario(autorDoPedido.getNomeUsuario()) != null) {
-			return new CreatedResponse("Pedido ja cadastrado", repository.findByIdUsuario(autorDoPedido.getNomeUsuario()).getId());
+			return new CreatedOrderResponse("Pedido ja cadastrado", repository.findByIdUsuario(autorDoPedido.getNomeUsuario()));
 		} else {
 			pedido.setDataDeInicio(System.currentTimeMillis());
 			Pedido pedidoCriado = repository.save(pedido);
