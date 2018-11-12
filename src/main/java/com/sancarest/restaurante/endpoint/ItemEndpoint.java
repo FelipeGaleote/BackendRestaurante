@@ -23,6 +23,7 @@ import com.sancarest.restaurante.responses.FailedResponse;
 import com.sancarest.restaurante.responses.RetrievedItensResponse;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("itens")
@@ -36,6 +37,7 @@ public class ItemEndpoint {
 	ProdutoRepository produtoRepository;
 	
 	@PostMapping
+	@ApiOperation(value = "Adiciona um item ao pedido e retorna o id do item")
 	public BaseResponse adicionarItem(@RequestBody Item item) {
 		try {
 			Item itemAdicionado = repository.save(item);
@@ -50,6 +52,7 @@ public class ItemEndpoint {
 	}
 	
 	@GetMapping("/{idPedido}")
+	@ApiOperation(value = "Retorna todos itens de um pedido com base em seu id")
 	public BaseResponse recuperarItensPorPedido(@PathVariable("idPedido") long idPedido) {
 		try {
 			List<Item> itens = repository.findByIdPedido(idPedido);

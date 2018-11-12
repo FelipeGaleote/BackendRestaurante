@@ -16,6 +16,7 @@ import com.sancarest.restaurante.responses.FailedResponse;
 import com.sancarest.restaurante.responses.UserLoggedResponse;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("usuarios")
@@ -27,6 +28,7 @@ public class UsuarioEndpoint {
 	UsuarioRepository repository;
 	
 	@PostMapping
+	@ApiOperation(value = "Cadastra um novo usuario e retorna seu id")
 	public BaseResponse cadastrarUsuario(@RequestBody Usuario usuario) {
 		try {
 			Usuario usuarioCadastrado = repository.save(usuario);
@@ -37,6 +39,7 @@ public class UsuarioEndpoint {
 	}
 	
 	@PostMapping("/token")
+	@ApiOperation(value = "Autentica o usuario e retorna seu token")
 	public BaseResponse recuperarTokenDeAutenticacao(@RequestBody Usuario usuario) {
 		try {
 			Usuario usuarioLogado = repository.findByNomeUsuarioAndSenha(usuario.getNomeUsuario(), usuario.getSenha());
