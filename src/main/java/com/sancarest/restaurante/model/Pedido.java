@@ -20,7 +20,6 @@ public class Pedido implements Serializable {
 	private String idUsuario;
 	private long dataDeInicio;
 	private long dataDeFinalizacao;
-	private ArrayList<Item> itens;
 
 	public long getId() {
 		return id;
@@ -60,13 +59,5 @@ public class Pedido implements Serializable {
 
 	public void setDataDeFinalizacao(long dataDeFinalizacao) {
 		this.dataDeFinalizacao = dataDeFinalizacao;
-	}
-
-	public ArrayList<Item> getItens() {
-		return itens;
-	}
-
-	public void setItens(ArrayList<Item> itens) {
-		this.itens = itens;
 	}
 }
