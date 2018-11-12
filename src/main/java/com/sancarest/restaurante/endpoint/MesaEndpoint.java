@@ -47,7 +47,7 @@ public class MesaEndpoint {
 	@ApiOperation(value = "Informa todas mesas existentes no sistema")
 	public BaseResponse informarMesas(){
 		try {
-			List<Mesa> tables = repository.findAll();
+			List<Mesa> tables = repository.findAllByOrderByIdAsc();
 			return new RetrievedTablesResponse("Mesas recuperadas com sucesso", tables);
 		} catch (Exception e) {
 			return new FailedResponse("Falha ao recuperar mesas");
