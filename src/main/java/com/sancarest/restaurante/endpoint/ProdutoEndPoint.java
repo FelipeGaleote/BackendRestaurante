@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,14 +21,20 @@ import com.sancarest.restaurante.responses.CreatedResponse;
 import com.sancarest.restaurante.responses.FailedResponse;
 import com.sancarest.restaurante.responses.RetrievedProductsResponse;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("produto")
+@Api("Endpoint de produtos")
+@CrossOrigin(origins="*")
 public class ProdutoEndPoint {
 	
 	@Autowired
 	ProdutoRepository produtoRepository;
 	
 	@PostMapping()
+	@ApiOperation(value = "Cadastra um produto e retorna seu id")
 	public BaseResponse cadastrarProduto(@RequestBody Produto produto) {
 		try {
 			Produto produtoSalvo = produtoRepository.save(produto);
@@ -38,6 +45,7 @@ public class ProdutoEndPoint {
 	}
 	
 	@GetMapping("lanches")
+	@ApiOperation(value = "Informa a lista com todos lanches do sistema")
 	public BaseResponse informarLanches() {
 		try {
 			List<Produto> retrievedProducts = produtoRepository.findByTipo("lanches");
@@ -48,6 +56,7 @@ public class ProdutoEndPoint {
 	}
 
 	@GetMapping("pizzas")
+	@ApiOperation(value = "Informa a lista com todas pizzas do sistema")
 	public BaseResponse informarPizzas() {
 		try {
 			List<Produto> retrievedProducts = produtoRepository.findByTipo("pizzas");
@@ -58,6 +67,7 @@ public class ProdutoEndPoint {
 	}
 
 	@GetMapping("saladas")
+	@ApiOperation(value = "Informa a lista com todas saladas do sistema")
 	public BaseResponse informarSaladas() {
 		try {
 			List<Produto> retrievedProducts = produtoRepository.findByTipo("saladas");
@@ -68,6 +78,7 @@ public class ProdutoEndPoint {
 	}
 
 	@GetMapping("petiscos")
+	@ApiOperation(value = "Informa a lista com todos petiscos do sistema")
 	public BaseResponse informarPetiscos() {
 		try {
 			List<Produto> retrievedProducts = produtoRepository.findByTipo("petiscos");
@@ -78,6 +89,7 @@ public class ProdutoEndPoint {
 	}
 
 	@GetMapping("sobremesas")
+	@ApiOperation(value = "Informa a lista com todas sobremesas do sistema")
 	public BaseResponse informarSobremesas() {
 		try {
 			List<Produto> retrievedProducts = produtoRepository.findByTipo("sobremesas");
@@ -88,6 +100,7 @@ public class ProdutoEndPoint {
 	}
 
 	@GetMapping("bebidas")
+	@ApiOperation(value = "Informa a lista com todas bebidas do sistema")
 	public BaseResponse informarBebidas() {
 		try {
 			List<Produto> retrievedProducts = produtoRepository.findByTipo("bebidas");

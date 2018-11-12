@@ -3,6 +3,7 @@ package com.sancarest.restaurante.endpoint;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,14 +19,20 @@ import com.sancarest.restaurante.responses.FailedResponse;
 import com.sancarest.restaurante.responses.RetrievedTablesResponse;
 import com.sancarest.restaurante.responses.UpdatedResponse;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/mesa")
+@Api("Endpoint de mesas")
+@CrossOrigin(origins="*")
 public class MesaEndpoint {
 	
 	@Autowired
 	MesaRepository repository;
 	
 	@PostMapping
+	@ApiOperation(value = "Cadastra uma mesa e retorna seu id")
 	public BaseResponse adicionarMesa() {
 		try {
 			Mesa mesa = repository.save(new Mesa("Dísponivel"));
@@ -37,6 +44,7 @@ public class MesaEndpoint {
 	}
 	
 	@GetMapping
+	@ApiOperation(value = "Informa todas mesas existentes no sistema")
 	public BaseResponse informarMesas(){
 		try {
 			List<Mesa> tables = repository.findAll();
@@ -48,6 +56,7 @@ public class MesaEndpoint {
 	}
 	
 	@PutMapping
+	@ApiOperation(value = "Atualiza o status de uma mesa, podendo ser : Dísponivel ou Ocupada")
 	public BaseResponse atualizarMesa(@RequestBody Mesa mesa) {
 		try {
 			Mesa mesaAtualizada = repository.save(mesa);

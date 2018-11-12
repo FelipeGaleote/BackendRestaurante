@@ -1,6 +1,7 @@
 package com.sancarest.restaurante.endpoint;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,8 @@ import com.sancarest.restaurante.model.Item;
 import com.sancarest.restaurante.model.Pedido;
 import com.sancarest.restaurante.util.DataUtil;
 
+import io.swagger.annotations.Api;
+
 import static java.util.Arrays.asList;
 
 import java.time.LocalDateTime;
@@ -18,6 +21,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("pedido")
+@Api("Endpoint de pedidos")
+@CrossOrigin(origins="*")
 public class PedidoEndpoint {
 
 	@Autowired
