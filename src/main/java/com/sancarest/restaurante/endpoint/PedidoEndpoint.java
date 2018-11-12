@@ -42,12 +42,6 @@ public class PedidoEndpoint {
 	@Autowired
 	UsuarioRepository userRepository;
 	
-
-	@RequestMapping(method = RequestMethod.GET, path = "/todositens")
-	public List<Item> todosItens() {
-		System.out.println(dataUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
-		return asList(new Item("Pastel de frango"), new Item("5"));
-	}
 	
 	@PostMapping
 	public BaseResponse criarPedido(@RequestBody Pedido pedido) {

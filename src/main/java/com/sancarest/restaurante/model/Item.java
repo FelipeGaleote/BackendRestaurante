@@ -43,22 +43,6 @@ public class Item implements Serializable{
 		this.quantidade = quantidade;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public Item(String nome) {
-		this.nomeProduto = nome;
-	}
-
-	public String getNome() {
-		return nomeProduto;
-	}
-
-	public void setNome(String nome) {
-		this.nomeProduto = nome;
-	}
-
 	public long getIdPedido() {
 		return idPedido;
 	}
@@ -66,7 +50,14 @@ public class Item implements Serializable{
 	public void setIdPedido(long idPedido) {
 		this.idPedido = idPedido;
 	}
-	
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 	
 	
 
