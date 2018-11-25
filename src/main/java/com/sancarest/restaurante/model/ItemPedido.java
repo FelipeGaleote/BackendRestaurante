@@ -11,14 +11,16 @@ public class ItemPedido implements Serializable {
 	private int quantidade;
 	private double valor;
 	private boolean finalizado;
+	private long idItem;
 	
-	public ItemPedido(long mesa, String nomeProduto, int quantidade, double valor, boolean finalizado) {
+	public ItemPedido(long mesa, String nomeProduto, int quantidade, double valor, boolean finalizado,long idItem) {
 		super();
 		this.mesa = mesa;
 		this.nomeProduto = nomeProduto;
 		this.quantidade = quantidade;
 		this.valor = valor;
 		this.finalizado = finalizado;
+		this.idItem = idItem;
 	}
 	
 	public ItemPedido() {
@@ -55,5 +57,13 @@ public class ItemPedido implements Serializable {
 
 	public void setFinalizado(boolean finalizado) {
 		this.finalizado = finalizado;
+	}
+
+	public long getIdItem() {
+		return idItem;
+	}
+
+	public void setIdItem(long idItem) {
+		this.idItem = idItem;
 	}
 }

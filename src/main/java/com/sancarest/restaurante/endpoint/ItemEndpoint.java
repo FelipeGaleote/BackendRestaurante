@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sancarest.restaurante.model.Item;
+import com.sancarest.restaurante.model.ItemEstado;
 import com.sancarest.restaurante.model.ItemPedido;
 import com.sancarest.restaurante.model.Pedido;
 import com.sancarest.restaurante.model.Produto;
@@ -25,6 +27,7 @@ import com.sancarest.restaurante.responses.BaseResponse;
 import com.sancarest.restaurante.responses.CreatedResponse;
 import com.sancarest.restaurante.responses.FailedResponse;
 import com.sancarest.restaurante.responses.RetrievedItensResponse;
+import com.sancarest.restaurante.responses.UpdatedResponse;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -55,6 +58,13 @@ public class ItemEndpoint {
 		} catch (Exception e) {
 			return new FailedResponse("Falha ao adicionar item");
 		}
+	}
+	
+	@PutMapping
+	@ApiOperation(value = "Atualiza o estado de um item do pedido")
+	public BaseResponse atualizarEstadoDoItem(@RequestBody ItemEstado itemEstado) {
+		repository.save(itemEstado.getItemId(), itemEstado.isItemEstado());
+		return new UpdatedResponse("Estado do pedido atualizado com sucesso", itemEstado.getItemId());
 	}
 	
 	@GetMapping("/{idPedido}")
@@ -91,7 +101,7 @@ public class ItemEndpoint {
 					if(!item.isFinalizado()) {
 						Optional<Produto> produto = produtoRepository.findById(item.getIdProduto());
 						if(produto.isPresent()) {
-							ItemPedido itemPedido = new ItemPedido(pedido.getIdMesa(), item.getNomeProduto(), item.getQuantidade(), produto.get().getValor(), item.isFinalizado());
+							ItemPedido itemPedido = new ItemPedido(pedido.getIdMesa(), item.getNomeProduto(), item.getQuantidade(), produto.get().getValor(), item.isFinalizado(), item.getId());
 							itensPedidos.add(itemPedido);
 						}	
 					}
