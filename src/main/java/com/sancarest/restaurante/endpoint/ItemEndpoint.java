@@ -62,7 +62,7 @@ public class ItemEndpoint {
 	
 	@PutMapping
 	@ApiOperation(value = "Atualiza o estado de um item do pedido")
-	public BaseResponse atualizarEstadoDoItem(@RequestBody ItemEstado itemEstado) {
+	public UpdatedResponse atualizarEstadoDoItem(@RequestBody ItemEstado itemEstado) {
 		repository.save(itemEstado.getItemId(), itemEstado.isItemEstado());
 		return new UpdatedResponse("Estado do pedido atualizado com sucesso", itemEstado.getItemId());
 	}
