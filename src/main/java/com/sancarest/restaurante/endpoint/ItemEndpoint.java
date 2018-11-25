@@ -14,9 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sancarest.restaurante.model.Item;
+import com.sancarest.restaurante.model.ItemPedido;
+import com.sancarest.restaurante.model.Pedido;
 import com.sancarest.restaurante.model.Produto;
 import com.sancarest.restaurante.repository.ItemRepository;
+import com.sancarest.restaurante.repository.PedidoRepository;
 import com.sancarest.restaurante.repository.ProdutoRepository;
+import com.sancarest.restaurante.responses.AllOrderItensResponse;
 import com.sancarest.restaurante.responses.BaseResponse;
 import com.sancarest.restaurante.responses.CreatedResponse;
 import com.sancarest.restaurante.responses.FailedResponse;
@@ -35,6 +39,8 @@ public class ItemEndpoint {
 	ItemRepository repository;
 	@Autowired
 	ProdutoRepository produtoRepository;
+	@Autowired
+	PedidoRepository pedidoRepository;
 	
 	@PostMapping
 	@ApiOperation(value = "Adiciona um item ao pedido e retorna o id do item")
@@ -71,6 +77,28 @@ public class ItemEndpoint {
 		} catch(Exception e) {
 			return new FailedResponse("Falha ao recuperar itens");
 		}
+	}
+	
+	@GetMapping
+	@ApiOperation(value = "Retorna todos pedidos e seus respectivos produtos e mesas")
+	public AllOrderItensResponse recuperarTodosPedidosEItens() {
+		List<Pedido> todosPedidos = pedidoRepository.findAll();
+		List<Item> todosItens = repository.findAll();
+		List<ItemPedido> itensPedidos = new ArrayList<ItemPedido>();
+		for (Pedido pedido : todosPedidos) {
+			for(Item item : todosItens) {
+				if(item.getIdPedido() == pedido.getId()) {
+					if(!item.isFinalizado()) {
+						Optional<Produto> produto = produtoRepository.findById(item.getIdProduto());
+						if(produto.isPresent()) {
+							ItemPedido itemPedido = new ItemPedido(pedido.getIdMesa(), item.getNomeProduto(), item.getQuantidade(), produto.get().getValor(), item.isFinalizado());
+							itensPedidos.add(itemPedido);
+						}	
+					}
+				}
+			}
+		}
+		return new AllOrderItensResponse(200, "Itens de pedido recuperados com sucesso!", itensPedidos);
 	}
 
 }

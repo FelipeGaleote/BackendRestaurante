@@ -18,6 +18,7 @@ public class Item implements Serializable{
 	private long idProduto;
 	private String nomeProduto;
 	private int quantidade;
+	private boolean finalizado;
 	
 	public String getNomeProduto() {
 		return nomeProduto;
@@ -57,6 +58,14 @@ public class Item implements Serializable{
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public boolean isFinalizado() {
+		return finalizado;
+	}
+
+	public void setFinalizado(boolean finalizado) {
+		this.finalizado = finalizado;
 	}
 	
 	
