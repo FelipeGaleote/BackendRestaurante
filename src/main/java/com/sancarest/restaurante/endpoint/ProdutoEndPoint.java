@@ -47,6 +47,14 @@ public class ProdutoEndPoint {
 		}
 	}
 	
+	@GetMapping()
+	@ApiOperation(value = "Informa a lista com todos produtos do sistema")
+	public RetrievedProductsResponse informarTodosProdutos() {
+		List<Produto> retrievedProducts = produtoRepository.findAll();
+		return new RetrievedProductsResponse("Produtos recuperados com sucesso", retrievedProducts);
+	}
+	
+	
 	@GetMapping("lanches")
 	@ApiOperation(value = "Informa a lista com todos lanches do sistema")
 	public BaseResponse informarLanches() {
